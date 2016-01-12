@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title></title>
+    <link href="main.css" rel="stylesheet">
+</head>
+<body>
+
+<div ng-app="DotLineApp" ng-init="" ng-controller="DotLineCtrl" ng-class="{}" class="app">
+    <div class="player">
+        <div class="con">
+            <div class="playerCnt" ng-class="{'yourTime':player==1}"
+                    style="background-color: blue;">player1:{{resultOfGame[0]}}</div>
+            <div class="playerCnt" ng-class="{'yourTime':player==2}"
+            style="background-color: red;">player2:{{resultOfGame[1]}}</div>
+        </div>
+        <span style="padding-left: 70px; padding-right: 70px; display: inline-block;">for play game click on dots...</span>
+        <div class="con">
+            <button ng-click="restartGame()">restart</button>
+            <button ng-click="newGame()">new Game</button>
+        </div>
+    </div>
+
+
+    <!-- ===== THIS IS THE GAME MAIN  ===================================== -->
+    <div class="row" ng-repeat="(myi, mainMatRow) in mainMat" style=" text-align: center;">
+        <div class="col" ng-repeat="(myj, mainMatCol) in mainMatRow"
+             ng-style="{'width':(myj==m)?'0':sqrWidthPerc}"
+             ng-class="{'nB':mainMatCol.lineX==2,
+                        'xLineDefault':mainMatCol.lineX==0, 'xLineSelected':mainMatCol.lineX==2, 'xLinemerge':mainMatCol.lineX==9,
+                        'yLineDefault':mainMatCol.lineY==0, 'yLineSelected':mainMatCol.lineY==2, 'yLinemerge':mainMatCol.lineY==9,
+                        'gamer1Sqr':mainMatCol.sqr==1,'gamer2Sqr':mainMatCol.sqr==2
+                        }">
+            <div class="sqr" ng-hide="mainMatCol.sqr==113"></div>
+            <div class="dot nw" ng-click="dotOnClick(myi,myj)"
+                 ng-class="{'dotDefault':mainMatCol.dot==0,'dotSelected':mainMatCol.dot==3,'dotBlink':mainMatCol.dot==1,'dotDeactive':mainMatCol.dot==10}"></div>
+        </div>
+    </div>
+</div>
+
+<script src="CDN/angular/angular1.2.26.min.js"></script>
+<script src="main.js"></script>
+</body>
+</html>
